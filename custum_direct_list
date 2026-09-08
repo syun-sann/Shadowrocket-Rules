@@ -127,6 +127,8 @@ DOMAIN,llpush.apple.com
 DOMAIN,cdsassets.apple.com
 DOMAIN,sse-ws.apple.com
 DOMAIN-SUFFIX,support.apple.com
+DOMAIN,books-personalization-server.apple.com
+DOMAIN,ocsp2.apple.com
 
 
 # onedrive desktop client & app direct 
