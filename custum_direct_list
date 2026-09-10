@@ -129,6 +129,7 @@ DOMAIN,sse-ws.apple.com
 DOMAIN-SUFFIX,support.apple.com
 DOMAIN,books-personalization-server.apple.com
 DOMAIN,ocsp2.apple.com
+DOMAIN,events-delivery.apple.com
 
 
 # onedrive desktop client & app direct 
