@@ -68,6 +68,7 @@ DOMAIN-KEYWORD,openai
 IP-CIDR,24.199.123.28/32,no-resolve
 IP-CIDR,64.23.132.171/32,no-resolve
 IP-ASN,20473,no-resolve
+
 #gemini
 DOMAIN,ai.google.dev
 DOMAIN,alkalimakersuite-pa.clients6.google.com
@@ -86,6 +87,7 @@ DOMAIN-SUFFIX,notebooklm.google.com
 DOMAIN,notebook.google.com
 DOMAIN,notebooklm.google
 DOMAIN,notebooklm.google.com
+
 #antigravity
 DOMAIN-KEYWORD,antigravity
 DOMAIN-SUFFIX,antigravity-unleash.goog
