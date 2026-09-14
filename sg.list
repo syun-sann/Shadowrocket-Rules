@@ -83,12 +83,25 @@ DOMAIN-SUFFIX,apis.google.com
 DOMAIN-KEYWORD,colab
 DOMAIN-KEYWORD,developerprofiles
 DOMAIN-KEYWORD,generativelanguage
+
+# NotebookLM 
+DOMAIN-KEYWORD,notebooklm
+DOMAIN-SUFFIX,notebooklm.google
 DOMAIN-SUFFIX,notebooklm.google.com
+DOMAIN-SUFFIX,notebook.google.com
 DOMAIN,notebooklm-pa.googleapis.com
-DOMAIN,notebook.google.com
-DOMAIN,notebooklm.google
-DOMAIN,notebooklm.google.com
+DOMAIN,notebooklm.googleapis.com
+DOMAIN,content-notebooklm-pa.googleapis.com
+DOMAIN,aisandbox-pa.googleapis.com
+
+# Gemini 核心前端与交互接口
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,generativeai.google
 DOMAIN,gemini.gstatic.com
+DOMAIN,proactivebackend-pa.googleapis.com
+DOMAIN,alkalimakersuite-pa.clients6.google.com
+DOMAIN,waa-pa.clients6.google.com
 
 #antigravity
 DOMAIN-KEYWORD,antigravity
