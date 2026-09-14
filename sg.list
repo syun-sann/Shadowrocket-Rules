@@ -103,6 +103,14 @@ DOMAIN,proactivebackend-pa.googleapis.com
 DOMAIN,alkalimakersuite-pa.clients6.google.com
 DOMAIN,waa-pa.clients6.google.com
 
+# 移动端 Gemini / Google 助手
+DOMAIN-SUFFIX,assistant.google.com
+DOMAIN,geller-pa.googleapis.com
+DOMAIN,mobileassistant-pa.googleapis.com
+DOMAIN,proactivebackend-pa.googleapis.com
+DOMAIN,waa-pa.clients6.google.com
+DOMAIN,firebaselogging-pa.googleapis.com
+
 #antigravity
 DOMAIN-KEYWORD,antigravity
 DOMAIN-SUFFIX,antigravity-unleash.goog
