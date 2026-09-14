@@ -115,6 +115,10 @@ DOMAIN,play.googleapis.com
 DOMAIN,oauth2.googleapis.com
 DOMAIN,securetoken.googleapis.com
 DOMAIN,identitytoolkit.googleapis.com
+DOMAIN-SUFFIX,robinfrontend-pa.googleapis.com
+DOMAIN-SUFFIX,labstailwind.pa.googleapis.com
+DOMAIN-SUFFIX,people-pa.googleapis.com
+DOMAIN-SUFFIX,oauthaccountmanager.googleapis.com
 
 #antigravity
 DOMAIN-KEYWORD,antigravity
