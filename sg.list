@@ -84,6 +84,7 @@ DOMAIN-KEYWORD,colab
 DOMAIN-KEYWORD,developerprofiles
 DOMAIN-KEYWORD,generativelanguage
 DOMAIN-SUFFIX,notebooklm.google.com
+DOMAIN,notebooklm-pa.googleapis.com
 DOMAIN,notebook.google.com
 DOMAIN,notebooklm.google
 DOMAIN,notebooklm.google.com
