@@ -87,6 +87,7 @@ DOMAIN-SUFFIX,notebooklm.google.com
 DOMAIN,notebook.google.com
 DOMAIN,notebooklm.google
 DOMAIN,notebooklm.google.com
+DOMAIN,gemini.gstatic.com
 
 #antigravity
 DOMAIN-KEYWORD,antigravity
