@@ -112,6 +112,9 @@ DOMAIN,waa-pa.clients6.google.com
 DOMAIN,firebaselogging-pa.googleapis.com
 DOMAIN,oauth2.googleapis.com
 DOMAIN,play.googleapis.com
+DOMAIN,oauth2.googleapis.com
+DOMAIN,securetoken.googleapis.com
+DOMAIN,identitytoolkit.googleapis.com
 
 #antigravity
 DOMAIN-KEYWORD,antigravity
