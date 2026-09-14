@@ -110,6 +110,8 @@ DOMAIN,mobileassistant-pa.googleapis.com
 DOMAIN,proactivebackend-pa.googleapis.com
 DOMAIN,waa-pa.clients6.google.com
 DOMAIN,firebaselogging-pa.googleapis.com
+DOMAIN,oauth2.googleapis.com
+DOMAIN,play.googleapis.com
 
 #antigravity
 DOMAIN-KEYWORD,antigravity
