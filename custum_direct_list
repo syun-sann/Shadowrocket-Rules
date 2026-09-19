@@ -144,12 +144,13 @@ DOMAIN,cdn.storeedgefd.dsx.mp.microsoft.com
 DOMAIN,207335-ipv4mte.gr.global.aa-rt.sharepoint.com
 DOMAIN,ctldl.windowsupdate.com
 
-# NAME: JingDong
-# AUTHOR: blackmatrix7
-# REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2026-02-14 02:16:19
-# DOMAIN-SUFFIX: 249
-# TOTAL: 249
+#edge
+DOMAIN,edge.activity.windows.com
+DOMAIN,edge.microsoft.com
+DOMAIN,iecvlist.microsoft.com
+DOMAIN,msedge.api.cdp.microsoft.com
+
+# JingDong
 DOMAIN-SUFFIX,1huizhan.com
 DOMAIN-SUFFIX,3.cn
 DOMAIN-SUFFIX,300hu.com
