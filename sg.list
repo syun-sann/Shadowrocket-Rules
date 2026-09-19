@@ -119,6 +119,17 @@ DOMAIN-SUFFIX,robinfrontend-pa.googleapis.com
 DOMAIN-SUFFIX,labstailwind.pa.googleapis.com
 DOMAIN-SUFFIX,people-pa.googleapis.com
 DOMAIN-SUFFIX,oauthaccountmanager.googleapis.com
+DOMAIN-SUFFIX,bard.google.com
+
+#Google Search
+DOMAIN-SUFFIX,google.com,PROXY
+
+# Streaming APIs & Authentication
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,googleusercontent.com
+DOMAIN-SUFFIX,gstatic.com
+DOMAIN-SUFFIX,gvt1.com
+DOMAIN-KEYWORD,alkalimakersuite
 
 #antigravity
 DOMAIN-KEYWORD,antigravity
