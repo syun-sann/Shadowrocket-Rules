@@ -121,9 +121,6 @@ DOMAIN-SUFFIX,people-pa.googleapis.com
 DOMAIN-SUFFIX,oauthaccountmanager.googleapis.com
 DOMAIN-SUFFIX,bard.google.com
 
-#Google Search
-DOMAIN-SUFFIX,google.com,PROXY
-
 # Streaming APIs & Authentication
 DOMAIN-SUFFIX,googleapis.com
 DOMAIN-SUFFIX,googleusercontent.com
@@ -135,4 +132,17 @@ DOMAIN-KEYWORD,alkalimakersuite
 DOMAIN-KEYWORD,antigravity
 DOMAIN-SUFFIX,antigravity-unleash.goog
 DOMAIN,daily-cloudcode-pa.googleapis.com
+DOMAIN-SUFFIX,antigravity.google
+DOMAIN,generativelanguage.googleapis.com
+DOMAIN,aiplatform.googleapis.com
+DOMAIN,developerprofiles.googleapis.com
+DOMAIN,developerknowledge.googleapis.com
+DOMAIN-SUFFIX,ai.google.dev
+DOMAIN-SUFFIX,makersuite.google.com
 
+
+# Authentication, CDN, and Streaming Handshakes
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,googleusercontent.com
+DOMAIN-SUFFIX,gstatic.com
+DOMAIN-SUFFIX,google.com
