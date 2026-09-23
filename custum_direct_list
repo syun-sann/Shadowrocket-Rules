@@ -35,6 +35,8 @@ DOMAIN-KEYWORD,kimi
 
 #Apple选择性直连服务
 
+DOMAIN,weatherkit.apple.com
+DOMAIN,gsp9-ssl.apple.com
 DOMAIN-SUFFIX,apple-mapkit.com
 DOMAIN-SUFFIX,push-apple.com.akadns.net
 DOMAIN-SUFFIX,apple.com.cn
