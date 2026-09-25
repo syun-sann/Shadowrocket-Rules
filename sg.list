@@ -69,81 +69,28 @@ IP-CIDR,24.199.123.28/32,no-resolve
 IP-CIDR,64.23.132.171/32,no-resolve
 IP-ASN,20473,no-resolve
 
-#gemini
-DOMAIN,ai.google.dev
-DOMAIN,alkalimakersuite-pa.clients6.google.com
-DOMAIN,makersuite.google.com
-DOMAIN-SUFFIX,bard.google.com
+# Broad Google Infrastructure (Covers all *.google.com, *.googleapis.com, *.gstatic.com)
+DOMAIN-SUFFIX,google.com
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,gstatic.com
+DOMAIN-SUFFIX,googleusercontent.com
+DOMAIN-SUFFIX,gvt1.com
+
+# Top-Level / Dedicated Domains
+DOMAIN-SUFFIX,ai.google.dev
+DOMAIN-SUFFIX,antigravity-unleash.goog
+DOMAIN-SUFFIX,antigravity.google
 DOMAIN-SUFFIX,deepmind.com
 DOMAIN-SUFFIX,deepmind.google
-DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,gemini.google
 DOMAIN-SUFFIX,generativeai.google
-DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
-DOMAIN-SUFFIX,apis.google.com
+DOMAIN-SUFFIX,notebooklm.google
+
+# Keywords
+DOMAIN-KEYWORD,alkalimakersuite
+DOMAIN-KEYWORD,antigravity
 DOMAIN-KEYWORD,colab
 DOMAIN-KEYWORD,developerprofiles
 DOMAIN-KEYWORD,generativelanguage
-DOMAIN,gemini.google
-
-# NotebookLM 
 DOMAIN-KEYWORD,notebooklm
-DOMAIN-SUFFIX,notebooklm.google
-DOMAIN-SUFFIX,notebooklm.google.com
-DOMAIN-SUFFIX,notebook.google.com
-DOMAIN,notebooklm-pa.googleapis.com
-DOMAIN,notebooklm.googleapis.com
-DOMAIN,content-notebooklm-pa.googleapis.com
-DOMAIN,aisandbox-pa.googleapis.com
 
-# Gemini 核心前端与交互接口
-DOMAIN-SUFFIX,gemini.google.com
-DOMAIN-SUFFIX,bard.google.com
-DOMAIN-SUFFIX,generativeai.google
-DOMAIN,gemini.gstatic.com
-DOMAIN,proactivebackend-pa.googleapis.com
-DOMAIN,alkalimakersuite-pa.clients6.google.com
-DOMAIN,waa-pa.clients6.google.com
-
-# 移动端 Gemini / Google 助手
-DOMAIN-SUFFIX,assistant.google.com
-DOMAIN,geller-pa.googleapis.com
-DOMAIN,mobileassistant-pa.googleapis.com
-DOMAIN,proactivebackend-pa.googleapis.com
-DOMAIN,waa-pa.clients6.google.com
-DOMAIN,firebaselogging-pa.googleapis.com
-DOMAIN,oauth2.googleapis.com
-DOMAIN,play.googleapis.com
-DOMAIN,oauth2.googleapis.com
-DOMAIN,securetoken.googleapis.com
-DOMAIN,identitytoolkit.googleapis.com
-DOMAIN-SUFFIX,robinfrontend-pa.googleapis.com
-DOMAIN-SUFFIX,labstailwind.pa.googleapis.com
-DOMAIN-SUFFIX,people-pa.googleapis.com
-DOMAIN-SUFFIX,oauthaccountmanager.googleapis.com
-DOMAIN-SUFFIX,bard.google.com
-
-# Streaming APIs & Authentication
-DOMAIN-SUFFIX,googleapis.com
-DOMAIN-SUFFIX,googleusercontent.com
-DOMAIN-SUFFIX,gstatic.com
-DOMAIN-SUFFIX,gvt1.com
-DOMAIN-KEYWORD,alkalimakersuite
-
-#antigravity
-DOMAIN-KEYWORD,antigravity
-DOMAIN-SUFFIX,antigravity-unleash.goog
-DOMAIN,daily-cloudcode-pa.googleapis.com
-DOMAIN-SUFFIX,antigravity.google
-DOMAIN,generativelanguage.googleapis.com
-DOMAIN,aiplatform.googleapis.com
-DOMAIN,developerprofiles.googleapis.com
-DOMAIN,developerknowledge.googleapis.com
-DOMAIN-SUFFIX,ai.google.dev
-DOMAIN-SUFFIX,makersuite.google.com
-
-
-# Authentication, CDN, and Streaming Handshakes
-DOMAIN-SUFFIX,googleapis.com
-DOMAIN-SUFFIX,googleusercontent.com
-DOMAIN-SUFFIX,gstatic.com
-DOMAIN-SUFFIX,google.com
