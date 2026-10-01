@@ -36,6 +36,7 @@ DOMAIN,ai.jzib.club
 
 #Apple选择性直连服务
 
+DOMAIN-SUFFIX,discussions.apple.com
 DOMAIN,weatherkit.apple.com
 DOMAIN,gsp9-ssl.apple.com
 DOMAIN,cl4-cn.apple.com
