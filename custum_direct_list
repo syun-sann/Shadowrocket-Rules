@@ -15,6 +15,7 @@ DOMAIN-SUFFIX，lsfd.miraheze.org
 DOMAIN-SUFFIX,deepseeksvc.com
 DOMAIN-SUFFIX,deepseek.com
 DOMAIN-KEYWORD,wayground
+DOMAIN-KEYWORD,kognity
 DOMAIN-SUFFIX,gm-sc.com
 IP-CIDR,103.41.167.226/32,no-resolve
 IP-CIDR,103.41.167.234/31,no-resolve
