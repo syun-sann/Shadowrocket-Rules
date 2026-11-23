@@ -53,13 +53,11 @@ DOMAIN-SUFFIX,cn-ssl.ls.apple.com
 DOMAIN-SUFFIX,gspe19-cn-ssl.ls.apple.com
 DOMAIN-SUFFIX,gspe19-2-cn-ssl.ls.apple.com
 DOMAIN-SUFFIX,ipcdn.apple.com
-DOMAIN-SUFFIX,ls.apple.com
 DOMAIN-SUFFIX,xp.apple.com
 DOMAIN-SUFFIX,cdn-apple.com
 DOMAIN-SUFFIX,lcdn-locator.apple.com
 DOMAIN-SUFFIX,devimages-cdn.apple.com
 DOMAIN-SUFFIX,gdmf.apple.com
-DOMAIN-SUFFIX,lcdn-locator.apple.com
 DOMAIN,aod-ssl.itunes.apple.com
 DOMAIN,aod.itunes.apple.com
 DOMAIN,audio-ssl.itunes.apple.com
@@ -69,7 +67,6 @@ DOMAIN,streamingaudio.itunes.apple.com
 DOMAIN-SUFFIX,applemusic.com
 DOMAIN-SUFFIX,blobstore.apple.com
 DOMAIN-SUFFIX,music.apple.com
-USER-AGENT,Music*
 DOMAIN,1-courier.push.apple.com
 DOMAIN,1-courier.sandbox.push.apple.com
 DOMAIN,lcdn-registration.apple.com
@@ -77,18 +74,14 @@ DOMAIN,st11p01su-lcdnreg.isu.apple.com.akadns.net
 DOMAIN,facetime-apple-com.we.apple-dns.net
 DOMAIN-SUFFIX,ess.apple.com
 DOMAIN-SUFFIX,push.apple.com
-DOMAIN-SUFFIX,configuration.apple.com
 DOMAIN,swscan.apple.com
 DOMAIN,swdist.apple.com
 DOMAIN-SUFFIX,apps.apple.com
 DOMAIN-SUFFIX,itunes.apple.com
 DOMAIN-KEYWORD,apple-support.akadns.net
-DOMAIN-KEYWORD,apple.com.akadns.net
-DOMAIN-KEYWORD,apple.com.edgekey.net
 DOMAIN-KEYWORD,buy.itunes.apple.com
 DOMAIN-KEYWORD,smp-device
 DOMAIN-KEYWORD,testflight
-DOMAIN-KEYWORD,icloud.com.akadns.net
 USER-AGENT,*FindMyiPhone?
 USER-AGENT,*Music?
 USER-AGENT,*WeatherFoundation*
@@ -113,6 +106,15 @@ USER-AGENT,com.apple.news*
 USER-AGENT,com.apple.trustd*
 USER-AGENT,com.apple.tv*
 DOMAIN-SUFFIX,books.apple.com
+# apple imessage verification
+DOMAIN,llpush.apple.com
+DOMAIN,cdsassets.apple.com
+DOMAIN,sse-ws.apple.com
+DOMAIN-SUFFIX,support.apple.com
+DOMAIN,books-personalization-server.apple.com
+DOMAIN,ocsp2.apple.com
+DOMAIN,events-delivery.apple.com
+#Apple Inc. IP
 IP-CIDR,139.178.128.0/18,no-resolve
 IP-CIDR,144.178.0.0/19,no-resolve
 IP-CIDR,144.178.36.0/22,no-resolve
@@ -126,16 +128,6 @@ IP-CIDR,2620:149::/32,no-resolve
 IP-CIDR,2a01:b740::/32,no-resolve
 IP-CIDR,63.92.224.0/19,no-resolve
 IP-CIDR,65.199.22.0/23,no-resolve
-# apple imessage verification
-DOMAIN-SUFFIX,ess.apple.com
-DOMAIN,llpush.apple.com
-DOMAIN,cdsassets.apple.com
-DOMAIN,sse-ws.apple.com
-DOMAIN-SUFFIX,support.apple.com
-DOMAIN,books-personalization-server.apple.com
-DOMAIN,ocsp2.apple.com
-DOMAIN,events-delivery.apple.com
-
 
 # onedrive desktop client & app direct 
 DOMAIN,api.onedrive.com
