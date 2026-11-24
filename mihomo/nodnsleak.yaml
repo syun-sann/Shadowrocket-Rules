@@ -1,0 +1,412 @@
+# Mihomo (Clash Meta) No-DNS-Leak Configuration
+# Aligned 1:1 with shadowrocket/nodnsleak.conf
+#
+# USAGE:
+#   1. Copy this file to mihomo/nodnsleak.local.yaml (gitignored) OR import into your client.
+#   2. Replace YOUR_SUBSCRIPTION_URL in proxy-providers.Airport.url with your airport subscription URL.
+#   3. Never commit personal subscription URLs to git.
+
+mixed-port: 7890
+allow-lan: false
+bind-address: "*"
+mode: rule
+log-level: info
+ipv6: false
+unified-delay: true
+tcp-concurrent: true
+find-process-mode: strict
+global-client-fingerprint: chrome
+
+geodata-mode: true
+geo-auto-update: true
+geo-update-interval: 24
+geox-url:
+  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  asn: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb"
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+
+tun:
+  enable: true
+  stack: system
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-detect-interface: true
+  strict-route: true
+
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  respect-rules: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - "localhost.ptlogin2.qq.com"
+    - "captive.apple.com"
+    - "wxh.wo.cn"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - "time.*.com"
+    - "ntp.*.com"
+    - "+.pool.ntp.org"
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  proxy-server-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  direct-nameserver:
+    - 223.5.5.5
+    - 114.114.114.114
+  nameserver:
+    - https://dns.cloudflare.com/dns-query
+    - https://dns.google/dns-query
+  nameserver-policy:
+    "geosite:cn,private":
+      - 223.5.5.5
+      - 114.114.114.114
+
+hosts:
+  localhost: 127.0.0.1
+
+# =============================================================================
+# Proxy Providers (Fill in your own subscription URL locally)
+# =============================================================================
+proxy-providers:
+  Airport:
+    type: http
+    url: "YOUR_SUBSCRIPTION_URL"
+    path: ./providers/airport.yaml
+    interval: 3600
+    health-check:
+      enable: true
+      url: http://cp.cloudflare.com/generate_204
+      interval: 300
+      timeout: 5000
+
+# =============================================================================
+# Proxy Groups (Aligned with shadowrocket/nodnsleak.conf)
+# =============================================================================
+_fallback_base: &fallback_base
+  type: fallback
+  use:
+    - Airport
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
+  timeout: 5000
+
+proxy-groups:
+  - name: PROXY
+    type: select
+    use:
+      - Airport
+    proxies:
+      - 🇭🇰FALLBACK
+      - 🇸🇬FALLBACK
+      - 🇯🇵FALLBACK
+      - 🇺🇸FALLBACK
+      - 🇹🇼FALLBACK
+      - DIRECT
+
+  # Service groups (first item is the default selection, matching policy-select-name)
+  - name: AI
+    type: select
+    proxies:
+      - 🇯🇵FALLBACK
+      - 🇸🇬FALLBACK
+      - 🇺🇸FALLBACK
+      - 🇹🇼FALLBACK
+      - PROXY
+      - DIRECT
+
+  - name: YOUTUBE
+    type: select
+    proxies:
+      - PROXY
+      - DIRECT
+      - 🇭🇰FALLBACK
+      - 🇸🇬FALLBACK
+      - 🇯🇵FALLBACK
+      - 🇺🇸FALLBACK
+      - 🇹🇼FALLBACK
+
+  - name: TWITTER
+    type: select
+    proxies:
+      - 🇭🇰FALLBACK
+      - PROXY
+      - DIRECT
+      - 🇸🇬FALLBACK
+      - 🇯🇵FALLBACK
+      - 🇺🇸FALLBACK
+      - 🇹🇼FALLBACK
+
+  - name: MICROSOFT
+    type: select
+    proxies:
+      - 🇭🇰FALLBACK
+      - PROXY
+      - DIRECT
+      - 🇸🇬FALLBACK
+      - 🇯🇵FALLBACK
+      - 🇺🇸FALLBACK
+      - 🇹🇼FALLBACK
+
+  - name: ZOOM
+    type: select
+    proxies:
+      - 🇭🇰FALLBACK
+      - PROXY
+      - DIRECT
+      - 🇸🇬FALLBACK
+      - 🇯🇵FALLBACK
+      - 🇺🇸FALLBACK
+      - 🇹🇼FALLBACK
+
+  - name: STEAM
+    type: select
+    proxies:
+      - 🇭🇰FALLBACK
+      - PROXY
+      - DIRECT
+      - 🇸🇬FALLBACK
+      - 🇯🇵FALLBACK
+      - 🇺🇸FALLBACK
+      - 🇹🇼FALLBACK
+
+  - name: ICLOUD
+    type: select
+    proxies:
+      - DIRECT
+      - PROXY
+      - 🇭🇰FALLBACK
+      - 🇸🇬FALLBACK
+      - 🇯🇵FALLBACK
+      - 🇺🇸FALLBACK
+      - 🇹🇼FALLBACK
+
+  - name: SPOTIFY
+    type: select
+    proxies:
+      - DIRECT
+      - PROXY
+      - 🇭🇰FALLBACK
+      - 🇸🇬FALLBACK
+      - 🇯🇵FALLBACK
+      - 🇺🇸FALLBACK
+      - 🇹🇼FALLBACK
+
+  - name: BILIBILI
+    type: select
+    proxies:
+      - DIRECT
+      - PROXY
+      - 🇭🇰FALLBACK
+      - 🇸🇬FALLBACK
+      - 🇯🇵FALLBACK
+      - 🇺🇸FALLBACK
+      - 🇹🇼FALLBACK
+
+  - name: FINAL
+    type: select
+    proxies:
+      - PROXY
+      - DIRECT
+      - 🇭🇰FALLBACK
+      - 🇸🇬FALLBACK
+      - 🇯🇵FALLBACK
+      - 🇺🇸FALLBACK
+      - 🇹🇼FALLBACK
+
+  # Regional Fallback groups (auto-matched from Airport provider)
+  - name: 🇸🇬FALLBACK
+    <<: *fallback_base
+    filter: "(?i)🇸🇬|新加坡|狮城|SG|Singapore"
+
+  - name: 🇭🇰FALLBACK
+    <<: *fallback_base
+    filter: "(?i)🇭🇰|香港|HK|Hong\\s?Kong"
+
+  - name: 🇯🇵FALLBACK
+    <<: *fallback_base
+    filter: "(?i)🇯🇵|日本|JP|Japan|Tokyo|Osaka"
+
+  - name: 🇺🇸FALLBACK
+    <<: *fallback_base
+    filter: "(?i)🇺🇸|美国|美|US|United\\s?States|America"
+
+  - name: 🇹🇼FALLBACK
+    <<: *fallback_base
+    filter: "(?i)🇹🇼|台湾|台|TW|Taiwan"
+
+# =============================================================================
+# Rule Providers (All verified Clash/Mihomo YAML format)
+# =============================================================================
+_pr_classical: &pr_classical
+  type: http
+  behavior: classical
+  format: yaml
+  interval: 86400
+
+_pr_domain: &pr_domain
+  type: http
+  behavior: domain
+  format: yaml
+  interval: 86400
+
+_pr_ipcidr: &pr_ipcidr
+  type: http
+  behavior: ipcidr
+  format: yaml
+  interval: 86400
+
+rule-providers:
+  # Ad Block
+  AntiAD:
+    <<: *pr_domain
+    url: https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-clash.yaml
+    path: ./ruleset/anti-ad-clash.yaml
+  BanProgramAD:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanProgramAD.yaml
+    path: ./ruleset/BanProgramAD.yaml
+  BanAD:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanAD.yaml
+    path: ./ruleset/BanAD.yaml
+
+  # LAN & China Direct
+  LocalAreaNetwork:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml
+    path: ./ruleset/LocalAreaNetwork.yaml
+  ChinaDomain:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaDomain.yaml
+    path: ./ruleset/ChinaDomain.yaml
+  ChinaMedia:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaMedia.yaml
+    path: ./ruleset/ChinaMedia.yaml
+  ChinaCompanyIp:
+    <<: *pr_ipcidr
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaCompanyIp.yaml
+    path: ./ruleset/ChinaCompanyIp.yaml
+  ChinaIp:
+    <<: *pr_ipcidr
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaIp.yaml
+    path: ./ruleset/ChinaIp.yaml
+
+  # Services (blackmatrix7 Clash *_No_Resolve.yaml variants)
+  YouTube:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube_No_Resolve.yaml
+    path: ./ruleset/YouTube.yaml
+  iCloud:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/iCloud/iCloud_No_Resolve.yaml
+    path: ./ruleset/iCloud.yaml
+  BiliBili:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili_No_Resolve.yaml
+    path: ./ruleset/BiliBili.yaml
+  SteamCN:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN_No_Resolve.yaml
+    path: ./ruleset/SteamCN.yaml
+  Steam:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam_No_Resolve.yaml
+    path: ./ruleset/Steam.yaml
+  Twitter:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter_No_Resolve.yaml
+    path: ./ruleset/Twitter.yaml
+  Spotify:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify_No_Resolve.yaml
+    path: ./ruleset/Spotify.yaml
+  Microsoft:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml
+    path: ./ruleset/Microsoft.yaml
+
+  # Custom Rule Sets (generated from rules/*.list via scripts/build_mihomo.py)
+  AI:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/syun-sann/proxy_scripts/main/mihomo/rules/ai.yaml
+    path: ./ruleset/custom-ai.yaml
+  CustomDirect:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/syun-sann/proxy_scripts/main/mihomo/rules/custom-direct.yaml
+    path: ./ruleset/custom-direct.yaml
+  Zoom:
+    <<: *pr_classical
+    url: https://raw.githubusercontent.com/syun-sann/proxy_scripts/main/mihomo/rules/zoom.yaml
+    path: ./ruleset/custom-zoom.yaml
+
+# =============================================================================
+# Rules (Exact precedence aligned with shadowrocket/nodnsleak.conf)
+# =============================================================================
+rules:
+  # Ad Block
+  - RULE-SET,AntiAD,REJECT
+  - RULE-SET,BanProgramAD,REJECT
+  - RULE-SET,BanAD,REJECT
+
+  # LAN & China Direct
+  - RULE-SET,LocalAreaNetwork,DIRECT
+  - RULE-SET,ChinaDomain,DIRECT
+  - RULE-SET,ChinaMedia,DIRECT
+  - RULE-SET,ChinaCompanyIp,DIRECT,no-resolve
+  - RULE-SET,ChinaIp,DIRECT,no-resolve
+
+  # Block QUIC on YouTube (matches block-quic intent without breaking direct/Zoom UDP)
+  - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,YouTube)),REJECT
+  - RULE-SET,YouTube,YOUTUBE
+
+  # Custom & Service Rules
+  - RULE-SET,AI,AI
+  - RULE-SET,CustomDirect,DIRECT
+  - RULE-SET,iCloud,ICLOUD
+  - RULE-SET,BiliBili,BILIBILI
+  - RULE-SET,SteamCN,DIRECT
+  - RULE-SET,Steam,STEAM
+  - RULE-SET,Twitter,TWITTER
+  - RULE-SET,Spotify,SPOTIFY
+  - RULE-SET,Microsoft,MICROSOFT
+  - RULE-SET,Zoom,ZOOM
+
+  # GEOIP (all with no-resolve)
+  - GEOIP,CN,DIRECT,no-resolve
+  - GEOIP,HK,🇭🇰FALLBACK,no-resolve
+  - GEOIP,SG,🇸🇬FALLBACK,no-resolve
+  - GEOIP,TW,🇹🇼FALLBACK,no-resolve
+
+  # Final Catch-all
+  - MATCH,FINAL

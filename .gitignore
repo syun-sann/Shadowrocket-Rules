@@ -1,0 +1,35 @@
+# Local private configs containing real subscription URLs or credentials
+*.local.yaml
+*.local.yml
+*.local.conf
+*.secret.*
+.env
+.env.*
+
+# Mihomo / Clash runtime caches & downloaded provider files
+mihomo/providers/
+mihomo/cache.db
+*.mrs.tmp
+
+# Local AI agent steering files & scratch
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+docs/RULES-SPEC.md
+.scratch/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# macOS & Editors
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+.vscode/
+.idea/
+*.swp
+*.swo
