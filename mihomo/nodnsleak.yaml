@@ -74,22 +74,23 @@ dns:
     - "time.*.com"
     - "ntp.*.com"
     - "+.pool.ntp.org"
+  # 1. Bootstrap DNS（纯 IP）：仅用于解析下方 DoH 服务器本身的域名
   default-nameserver:
     - 223.5.5.5
-    - 119.29.29.29
+    - 114.114.114.114
+  # 2. 机场节点入口专用 DNS（对应 Shadowrocket 的 proxy-dns-server）
   proxy-server-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
+    - https://radar.rlose.com/api-query
+    - https://zone.rlose.com:39933/api-query
+  # 3. 直连网站 DNS（对应 Shadowrocket 的 dns-server，仅解析命中 DIRECT 规则的域名）
   direct-nameserver:
     - 223.5.5.5
     - 114.114.114.114
+    - system
+  # 4. 兜底/代理侧 DoH（配合 respect-rules: true 走代理，防 DNS 泄漏）
   nameserver:
     - https://dns.cloudflare.com/dns-query
     - https://dns.google/dns-query
-  nameserver-policy:
-    "geosite:cn,private":
-      - 223.5.5.5
-      - 114.114.114.114
 
 hosts:
   localhost: 127.0.0.1
