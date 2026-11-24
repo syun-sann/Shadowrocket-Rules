@@ -5,6 +5,7 @@
 *.secret.*
 .env
 .env.*
+!.env.example
 
 # Mihomo / Clash runtime caches & downloaded provider files
 mihomo/providers/

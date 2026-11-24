@@ -15,7 +15,12 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 RULES_DIR = REPO_ROOT / "rules"
-MIHOMO_RULES_DIR = REPO_ROOT / "mihomo" / "rules"
+MIHOMO_DIR = REPO_ROOT / "mihomo"
+MIHOMO_RULES_DIR = MIHOMO_DIR / "rules"
+TEMPLATE_CONFIG = MIHOMO_DIR / "nodnsleak.yaml"
+LOCAL_CONFIG = MIHOMO_DIR / "nodnsleak.local.yaml"
+ENV_FILE = REPO_ROOT / ".env"
+SUBSCRIPTION_PLACEHOLDER = "YOUR_SUBSCRIPTION_URL"
 
 SUPPORTED_SHADOWROCKET_TYPES = {
     "DOMAIN",
@@ -120,6 +125,73 @@ def convert_list_file(src: Path) -> tuple[str, dict[str, int], list[str]]:
     return content, stats, errors
 
 
+def load_dotenv(path: Path) -> dict[str, str]:
+    """Parse simple KEY=VALUE pairs from a .env file without external dependencies."""
+    env: dict[str, str] = {}
+    if not path.exists():
+        return env
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
+            value = value[1:-1]
+        env[key] = value
+    return env
+
+
+def check_template_config() -> list[str]:
+    """Verify mihomo/nodnsleak.yaml keeps its placeholder URL and avoids known syntax traps."""
+    errors: list[str] = []
+    if not TEMPLATE_CONFIG.exists():
+        return [f"{TEMPLATE_CONFIG.relative_to(REPO_ROOT)}: template config not found"]
+
+    text = TEMPLATE_CONFIG.read_text(encoding="utf-8")
+    if SUBSCRIPTION_PLACEHOLDER not in text:
+        errors.append(
+            f"{TEMPLATE_CONFIG.relative_to(REPO_ROOT)}: missing '{SUBSCRIPTION_PLACEHOLDER}' placeholder "
+            "(do not put real subscription URLs in the tracked template; use .env instead)"
+        )
+
+    # Guard against mixing geosite: and domain wildcards in the same nameserver-policy key
+    in_policy = False
+    for lineno, raw in enumerate(text.splitlines(), start=1):
+        stripped = raw.strip()
+        if stripped == "nameserver-policy:":
+            in_policy = True
+            continue
+        if in_policy:
+            if raw and not raw.startswith(" ") and not stripped.startswith("#"):
+                in_policy = False
+            elif stripped.startswith('"') and "," in stripped.split(":", 1)[0]:
+                errors.append(
+                    f"{TEMPLATE_CONFIG.relative_to(REPO_ROOT)}:{lineno}: comma in nameserver-policy key "
+                    f"({stripped.split(':', 1)[0]}); split each geosite/domain into its own key"
+                )
+    return errors
+
+
+def render_local_config() -> None:
+    """Render gitignored mihomo/nodnsleak.local.yaml using SUBSCRIPTION_URL from .env."""
+    env = load_dotenv(ENV_FILE)
+    sub_url = env.get("SUBSCRIPTION_URL", "").strip()
+    if not sub_url or sub_url == SUBSCRIPTION_PLACEHOLDER:
+        print(
+            f"SKIP  {LOCAL_CONFIG.relative_to(REPO_ROOT)}: "
+            "copy .env.example to .env and set SUBSCRIPTION_URL to auto-generate local config"
+        )
+        return
+
+    template = TEMPLATE_CONFIG.read_text(encoding="utf-8")
+    rendered = template.replace(SUBSCRIPTION_PLACEHOLDER, sub_url)
+    banner = "# Auto-generated local config from mihomo/nodnsleak.yaml + .env (gitignored)\n"
+    LOCAL_CONFIG.write_text(banner + rendered, encoding="utf-8")
+    print(f"BUILT {LOCAL_CONFIG.relative_to(REPO_ROOT)}: injected SUBSCRIPTION_URL from .env")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build and validate Mihomo rule-providers from rules/*.list")
     parser.add_argument("--check", action="store_true", help="Validate without writing; fail if out of sync")
@@ -166,13 +238,18 @@ def main() -> int:
             if existing not in expected_outputs:
                 all_errors.append(f"{existing.relative_to(REPO_ROOT)}: stale generated file with no matching rules/*.list")
 
+    all_errors.extend(check_template_config())
+
     if all_errors:
         print("\nValidation failed:", file=sys.stderr)
         for err in all_errors:
             print(f"  - {err}", file=sys.stderr)
         return 1
 
-    print("\nAll rules validated successfully.")
+    if not args.check:
+        render_local_config()
+
+    print("\nAll rules and template config validated successfully.")
     return 0
 
 

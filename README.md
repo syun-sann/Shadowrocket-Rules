@@ -9,6 +9,9 @@ Personal no-DNS-leak proxy configurations and custom rule sets for **Shadowrocke
 - `mihomo/` — Mihomo (Clash Meta) configuration template (`nodnsleak.yaml`) and generated rule-providers (`mihomo/rules/`).
 - `scripts/` — Conversion and validation tooling (`build_mihomo.py`).
 
-## Privacy Note
+## Local Usage (Mihomo)
 
-This is a public repository. Place any locally filled-in configs containing real subscription URLs in `*.local.yaml` or `*.local.conf` (excluded via `.gitignore`).
+1. Copy `.env.example` to `.env` (gitignored) and set `SUBSCRIPTION_URL`.
+2. Run `python3 scripts/build_mihomo.py` after editing `rules/*.list` or `mihomo/nodnsleak.yaml`.
+   - Regenerates `mihomo/rules/*.yaml` (committed to GitHub).
+   - Auto-generates `mihomo/nodnsleak.local.yaml` with your subscription URL injected (gitignored, ready to import in your Clash/Mihomo client).

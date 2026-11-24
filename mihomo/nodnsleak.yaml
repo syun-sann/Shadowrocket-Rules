@@ -103,13 +103,26 @@ dns:
     - https://1.1.1.1/dns-query
     - https://8.8.8.8/dns-query
   # 5. 防止 fake-ip-filter 中的局域网/门户/NTP 查询泄露到外部 DoH
+  #    注意：Mihomo 的 nameserver-policy 中，geosite: 与域名不可混写在同一 key，且每个域名需独立成 key
   nameserver-policy:
-    "geosite:private,+.lan,+.local,+.home.arpa,+.localdomain":
+    "geosite:private": &dns_system
       - system
-    "captive.apple.com,wxh.wo.cn,+.msftconnecttest.com,+.msftncsi.com,time.apple.com,time.*.com,ntp.*.com,+.pool.ntp.org,+.ntp.org.cn":
+    "+.lan": *dns_system
+    "+.local": *dns_system
+    "+.home.arpa": *dns_system
+    "+.localdomain": *dns_system
+    "captive.apple.com": &dns_cn
       - 223.5.5.5
       - 114.114.114.114
       - system
+    "wxh.wo.cn": *dns_cn
+    "+.msftconnecttest.com": *dns_cn
+    "+.msftncsi.com": *dns_cn
+    "time.apple.com": *dns_cn
+    "time.*.com": *dns_cn
+    "ntp.*.com": *dns_cn
+    "+.pool.ntp.org": *dns_cn
+    "+.ntp.org.cn": *dns_cn
 
 hosts:
   localhost: 127.0.0.1
