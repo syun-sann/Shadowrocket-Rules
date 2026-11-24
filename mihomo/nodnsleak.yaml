@@ -8,7 +8,7 @@
 
 mixed-port: 7890
 allow-lan: false
-bind-address: "*"
+bind-address: "127.0.0.1"
 mode: rule
 log-level: info
 ipv6: false
@@ -32,6 +32,7 @@ profile:
 
 sniffer:
   enable: true
+  force-dns-mapping: true
   parse-pure-ip: true
   override-destination: true
   sniff:
@@ -58,23 +59,33 @@ tun:
 
 dns:
   enable: true
-  listen: 0.0.0.0:1053
+  listen: 127.0.0.1:1053
   ipv6: false
   respect-rules: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - "*.lan"
+    - "+.lan"
     - "*.local"
+    - "+.local"
+    - "+.home.arpa"
+    - "+.localdomain"
     - "localhost.ptlogin2.qq.com"
+    - "localhost.sec.qq.com"
     - "captive.apple.com"
     - "wxh.wo.cn"
     - "+.msftconnecttest.com"
     - "+.msftncsi.com"
+    - "time.apple.com"
     - "time.*.com"
     - "ntp.*.com"
     - "+.pool.ntp.org"
-  # 1. Bootstrap DNS（纯 IP）：仅用于解析下方 DoH 服务器本身的域名
+    - "+.ntp.org.cn"
+    - "+.stun.*.*"
+    - "+.stun.*.*.*"
+    - "+.stun.*.*.*.*"
+  # 1. Bootstrap DNS（纯 IP）：仅用于解析下方域名型 DoH 服务器本身
   default-nameserver:
     - 223.5.5.5
     - 114.114.114.114
@@ -87,10 +98,18 @@ dns:
     - 223.5.5.5
     - 114.114.114.114
     - system
-  # 4. 兜底/代理侧 DoH（配合 respect-rules: true 走代理，防 DNS 泄漏）
+  # 4. 代理侧/兜底 DoH（IP 型 DoH 免受国内 DNS 污染，配合 respect-rules: true 走代理）
   nameserver:
-    - https://dns.cloudflare.com/dns-query
-    - https://dns.google/dns-query
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+  # 5. 防止 fake-ip-filter 中的局域网/门户/NTP 查询泄露到外部 DoH
+  nameserver-policy:
+    "geosite:private,+.lan,+.local,+.home.arpa,+.localdomain":
+      - system
+    "captive.apple.com,wxh.wo.cn,+.msftconnecttest.com,+.msftncsi.com,time.apple.com,time.*.com,ntp.*.com,+.pool.ntp.org,+.ntp.org.cn":
+      - 223.5.5.5
+      - 114.114.114.114
+      - system
 
 hosts:
   localhost: 127.0.0.1
@@ -247,23 +266,23 @@ proxy-groups:
   # Regional Fallback groups (auto-matched from Airport provider)
   - name: 🇸🇬FALLBACK
     <<: *fallback_base
-    filter: "(?i)🇸🇬|新加坡|狮城|SG|Singapore"
+    filter: "(?i)🇸🇬|新加坡|狮城|Singapore|\\bSG\\b"
 
   - name: 🇭🇰FALLBACK
     <<: *fallback_base
-    filter: "(?i)🇭🇰|香港|HK|Hong\\s?Kong"
+    filter: "(?i)🇭🇰|香港|Hong\\s?Kong|\\bHK\\b"
 
   - name: 🇯🇵FALLBACK
     <<: *fallback_base
-    filter: "(?i)🇯🇵|日本|JP|Japan|Tokyo|Osaka"
+    filter: "(?i)🇯🇵|日本|东京|大阪|Japan|Tokyo|Osaka|\\bJP\\b"
 
   - name: 🇺🇸FALLBACK
     <<: *fallback_base
-    filter: "(?i)🇺🇸|美国|美|US|United\\s?States|America"
+    filter: "(?i)🇺🇸|美国|United\\s?States|America|\\b(US|USA)\\b"
 
   - name: 🇹🇼FALLBACK
     <<: *fallback_base
-    filter: "(?i)🇹🇼|台湾|台|TW|Taiwan"
+    filter: "(?i)🇹🇼|台湾|台北|Taiwan|\\bTW\\b"
 
 # =============================================================================
 # Rule Providers (All verified Clash/Mihomo YAML format)
