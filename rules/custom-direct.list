@@ -114,6 +114,16 @@ DOMAIN-SUFFIX,support.apple.com
 DOMAIN,books-personalization-server.apple.com
 DOMAIN,ocsp2.apple.com
 DOMAIN,events-delivery.apple.com
+DOMAIN,time.apple.com
+DOMAIN,time.asia.apple.com
+DOMAIN,tether.edge.apple
+DOMAIN,mesu.apple.com
+DOMAIN,gsa-gpk.apple.com
+DOMAIN,init-p01md.apple.com
+DOMAIN,support-sp.apple.com
+DOMAIN,amp-api.podcasts.apple.com
+DOMAIN,pancake.apple.com
+DOMAIN,sas.pcms.apple.com
 #Apple Inc. IP
 IP-CIDR,139.178.128.0/18,no-resolve
 IP-CIDR,144.178.0.0/19,no-resolve
