@@ -156,10 +156,15 @@ def check_template_config() -> list[str]:
             "(do not put real subscription URLs in the tracked template; use .env instead)"
         )
 
-    # Guard against mixing geosite: and domain wildcards in the same nameserver-policy key
+    # Guard against removed Mihomo top-level options and nameserver-policy syntax traps
     in_policy = False
     for lineno, raw in enumerate(text.splitlines(), start=1):
         stripped = raw.strip()
+        if raw.startswith("global-client-fingerprint:"):
+            errors.append(
+                f"{TEMPLATE_CONFIG.relative_to(REPO_ROOT)}:{lineno}: 'global-client-fingerprint' "
+                "was removed in Mihomo; set 'client-fingerprint' per proxy or remove it"
+            )
         if stripped == "nameserver-policy:":
             in_policy = True
             continue

@@ -15,7 +15,6 @@ ipv6: false
 unified-delay: true
 tcp-concurrent: true
 find-process-mode: strict
-global-client-fingerprint: chrome
 
 geodata-mode: true
 geo-auto-update: true
@@ -187,6 +186,13 @@ proxy-groups:
       - 🇯🇵FALLBACK
       - 🇺🇸FALLBACK
       - 🇹🇼FALLBACK
+
+  - name: YOUTUBE-QUIC
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+      - YOUTUBE
 
   - name: TWITTER
     type: select
@@ -419,8 +425,8 @@ rules:
   - RULE-SET,ChinaCompanyIp,DIRECT,no-resolve
   - RULE-SET,ChinaIp,DIRECT,no-resolve
 
-  # Block QUIC on YouTube (matches block-quic intent without breaking direct/Zoom UDP)
-  - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,YouTube)),REJECT
+  # YouTube QUIC (default REJECT for proxy stability; switch YOUTUBE-QUIC to DIRECT on leased line)
+  - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,YouTube)),YOUTUBE-QUIC
   - RULE-SET,YouTube,YOUTUBE
 
   # Custom & Service Rules
