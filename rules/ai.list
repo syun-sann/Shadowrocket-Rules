@@ -51,8 +51,6 @@ DOMAIN-SUFFIX,events.statsigapi.net
 DOMAIN-SUFFIX,featuregates.org
 DOMAIN-SUFFIX,host.livekit.cloud
 DOMAIN-SUFFIX,identrust.com
-DOMAIN-SUFFIX,intercom.io
-DOMAIN-SUFFIX,intercomcdn.com
 DOMAIN-SUFFIX,launchdarkly.com
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
@@ -61,7 +59,6 @@ DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,openaiapi-site.azureedge.net
 DOMAIN-SUFFIX,openaicom.imgix.net
 DOMAIN-SUFFIX,segment.io
-DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,stripe.com
 DOMAIN-SUFFIX,turn.livekit.cloud
 DOMAIN-KEYWORD,openai
