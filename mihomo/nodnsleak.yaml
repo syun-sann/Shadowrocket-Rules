@@ -165,6 +165,18 @@ proxy-groups:
       - 🇹🇼FALLBACK
       - DIRECT
 
+  # Master outbound switch (toggle between 🇭🇰FALLBACK/PROXY at home and DIRECT on campus leased line)
+  - name: OUTBOUND
+    type: select
+    proxies:
+      - 🇭🇰FALLBACK
+      - DIRECT
+      - PROXY
+      - 🇸🇬FALLBACK
+      - 🇯🇵FALLBACK
+      - 🇺🇸FALLBACK
+      - 🇹🇼FALLBACK
+
   # Service groups (first item is the default selection, matching policy-select-name)
   - name: AI
     type: select
@@ -179,27 +191,22 @@ proxy-groups:
   - name: YOUTUBE
     type: select
     proxies:
-      - PROXY
+      - OUTBOUND
       - DIRECT
+      - PROXY
       - 🇭🇰FALLBACK
       - 🇸🇬FALLBACK
       - 🇯🇵FALLBACK
       - 🇺🇸FALLBACK
       - 🇹🇼FALLBACK
 
-  - name: YOUTUBE-QUIC
-    type: select
-    proxies:
-      - REJECT
-      - DIRECT
-      - YOUTUBE
-
   - name: TWITTER
     type: select
     proxies:
-      - 🇭🇰FALLBACK
-      - PROXY
+      - OUTBOUND
       - DIRECT
+      - PROXY
+      - 🇭🇰FALLBACK
       - 🇸🇬FALLBACK
       - 🇯🇵FALLBACK
       - 🇺🇸FALLBACK
@@ -208,9 +215,10 @@ proxy-groups:
   - name: MICROSOFT
     type: select
     proxies:
-      - 🇭🇰FALLBACK
-      - PROXY
+      - OUTBOUND
       - DIRECT
+      - PROXY
+      - 🇭🇰FALLBACK
       - 🇸🇬FALLBACK
       - 🇯🇵FALLBACK
       - 🇺🇸FALLBACK
@@ -219,9 +227,10 @@ proxy-groups:
   - name: ZOOM
     type: select
     proxies:
-      - 🇭🇰FALLBACK
-      - PROXY
+      - OUTBOUND
       - DIRECT
+      - PROXY
+      - 🇭🇰FALLBACK
       - 🇸🇬FALLBACK
       - 🇯🇵FALLBACK
       - 🇺🇸FALLBACK
@@ -275,6 +284,7 @@ proxy-groups:
     type: select
     proxies:
       - PROXY
+      - OUTBOUND
       - DIRECT
       - 🇭🇰FALLBACK
       - 🇸🇬FALLBACK
@@ -425,8 +435,8 @@ rules:
   - RULE-SET,ChinaCompanyIp,DIRECT,no-resolve
   - RULE-SET,ChinaIp,DIRECT,no-resolve
 
-  # YouTube QUIC (default REJECT for proxy stability; switch YOUTUBE-QUIC to DIRECT on leased line)
-  - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,YouTube)),YOUTUBE-QUIC
+  # Block QUIC on YouTube (matches block-quic intent without breaking direct/Zoom UDP)
+  - AND,((NETWORK,UDP),(DST-PORT,443),(RULE-SET,YouTube)),REJECT
   - RULE-SET,YouTube,YOUTUBE
 
   # Custom & Service Rules
