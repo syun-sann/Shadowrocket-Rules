@@ -159,19 +159,7 @@ proxy-groups:
       - Airport
     proxies:
       - 🇭🇰FALLBACK
-      - 🇸🇬FALLBACK
-      - 🇯🇵FALLBACK
-      - 🇺🇸FALLBACK
-      - 🇹🇼FALLBACK
       - DIRECT
-
-  # Master outbound switch (toggle between 🇭🇰FALLBACK/PROXY at home and DIRECT on campus leased line)
-  - name: OUTBOUND
-    type: select
-    proxies:
-      - 🇭🇰FALLBACK
-      - DIRECT
-      - PROXY
       - 🇸🇬FALLBACK
       - 🇯🇵FALLBACK
       - 🇺🇸FALLBACK
@@ -191,9 +179,8 @@ proxy-groups:
   - name: YOUTUBE
     type: select
     proxies:
-      - OUTBOUND
-      - DIRECT
       - PROXY
+      - DIRECT
       - 🇭🇰FALLBACK
       - 🇸🇬FALLBACK
       - 🇯🇵FALLBACK
@@ -203,9 +190,8 @@ proxy-groups:
   - name: TWITTER
     type: select
     proxies:
-      - OUTBOUND
-      - DIRECT
       - PROXY
+      - DIRECT
       - 🇭🇰FALLBACK
       - 🇸🇬FALLBACK
       - 🇯🇵FALLBACK
@@ -215,9 +201,8 @@ proxy-groups:
   - name: MICROSOFT
     type: select
     proxies:
-      - OUTBOUND
-      - DIRECT
       - PROXY
+      - DIRECT
       - 🇭🇰FALLBACK
       - 🇸🇬FALLBACK
       - 🇯🇵FALLBACK
@@ -227,9 +212,8 @@ proxy-groups:
   - name: ZOOM
     type: select
     proxies:
-      - OUTBOUND
-      - DIRECT
       - PROXY
+      - DIRECT
       - 🇭🇰FALLBACK
       - 🇸🇬FALLBACK
       - 🇯🇵FALLBACK
@@ -284,7 +268,6 @@ proxy-groups:
     type: select
     proxies:
       - PROXY
-      - OUTBOUND
       - DIRECT
       - 🇭🇰FALLBACK
       - 🇸🇬FALLBACK
