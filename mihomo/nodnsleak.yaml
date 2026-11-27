@@ -94,8 +94,6 @@ dns:
     - https://zone.rlose.com:39933/api-query
   # 3. 直连网站 DNS（对应 Shadowrocket 的 dns-server，仅解析命中 DIRECT 规则的域名）
   direct-nameserver:
-    - 223.5.5.5
-    - 114.114.114.114
     - system
   # 4. 代理侧/兜底 DoH（IP 型 DoH 免受国内 DNS 污染，配合 respect-rules: true 走代理）
   nameserver:
@@ -110,18 +108,15 @@ dns:
     "+.local": *dns_system
     "+.home.arpa": *dns_system
     "+.localdomain": *dns_system
-    "captive.apple.com": &dns_cn
-      - 223.5.5.5
-      - 114.114.114.114
-      - system
-    "wxh.wo.cn": *dns_cn
-    "+.msftconnecttest.com": *dns_cn
-    "+.msftncsi.com": *dns_cn
-    "time.apple.com": *dns_cn
-    "time.*.com": *dns_cn
-    "ntp.*.com": *dns_cn
-    "+.pool.ntp.org": *dns_cn
-    "+.ntp.org.cn": *dns_cn
+    "captive.apple.com": *dns_system
+    "wxh.wo.cn": *dns_system
+    "+.msftconnecttest.com": *dns_system
+    "+.msftncsi.com": *dns_system
+    "time.apple.com": *dns_system
+    "time.*.com": *dns_system
+    "ntp.*.com": *dns_system
+    "+.pool.ntp.org": *dns_system
+    "+.ntp.org.cn": *dns_system
 
 hosts:
   localhost: 127.0.0.1
